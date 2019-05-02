@@ -1,0 +1,12 @@
+{
+  "autoload": {
+    "psr-4": {
+      "View\\": "src"
+    }
+  },
+  "require": {
+    "curl/curl": "^2.2",
+    "ext-curl": "*",
+    "ext-json": "*"
+  }
+}
