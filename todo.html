@@ -8,14 +8,34 @@
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css"
           integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
     <meta charset="UTF-8">
-    <title>TodoList</title>
+    <title >TodoList</title>
 </head>
-<body>
-
+<body style="background-image:url(nicebc.jpg)">
 <div class="container">
 
-    <div class="row">
-        <div style="text-align: center;"><h>TodoTasks</h>1</div>
+    <div class="row" style="margin-top: 70px;">
+        <div  style="text-align: center; color: #edf4ff"><h1>TodoTasks</h1></div>
+
+        <div class="col-md-10 col-md-offset-1">
+            <table class="table">
+                <thead>
+                <tr>
+                    <th style="color: #f8fff9">List No.</th>
+                    <th style="color: #f9f9ff">Title</th>
+                </tr>
+                </thead>
+                <tbody>
+                <tr>
+                    <?php foreach($listArray as $list) :?>
+
+                    <td style="color: #f5f8ff" class="col-md-2"><?php echo $list->id; ?></td>
+                    <td style="color: #edf4ff" class="col-md-10"><?php echo $list->title; ?></td>
+                    <td><input class="btn btn-success" onclick="location.href='http://127.0.0.1/ToDoList/optional?list_id=<?php echo $list->id;?>';" value="Select" /></td>
+                </tr>
+                <?php endforeach;?>
+                </tbody>
+            </table>
+        </div>
 
     </div>
 </div>

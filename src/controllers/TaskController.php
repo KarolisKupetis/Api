@@ -22,25 +22,71 @@ class TaskController
 
         if (isset($_GET['list_id']))
         {
-            $re = $this->taskService->getAllTasks($_SERVER['HTTP_ACCESS'],$_GET['list_id']);
-            echo json_encode($re);
-            return $re;
+            return $this->taskService->getAllTasks($_GET['list_id']);
         }
         elseif(is_numeric($lastUrlElement)){
-            http_response_code(200);
 
-            echo json_encode(array('arr'=>$lastUrlElement));
+            return $this->taskService->getOneTask($lastUrlElement);
         }
         else
         {
-            http_response_code(404);
+            http_response_code(500);
         }
-
-        return null;
     }
 
-    public function postTasks()
+    public function postTask()
     {
+        $json = file_get_contents('php://input');
+        $content = json_decode($json,true);
+        if(!isset($content['list_id']))
+        {
+            http_response_code(500);
+            return json_encode(array('list_id'=>"missing"));
+        }
+        if(!isset($content['title']))
+        {
+            http_response_code(400);
+            return json_encode(array('title'=>"missing"));
+        }
 
+        return $this->taskService->createTask($content);
+    }
+
+    public function patchTask()
+    {
+        $url = $_GET['url'];
+        $keys = parse_url($url);
+        $path = explode("/", $keys['path']);
+        $lastUrlElement = end($path);
+
+        $json = file_get_contents('php://input');
+        $content = json_decode($json,true);
+
+        $content['id'] = $lastUrlElement;
+        if(!isset($content['revision']))
+        {
+            http_response_code(500);
+            return json_encode(array('revision'=>"missing"));
+        }
+
+        return $this->taskService->updateTask($content);
+    }
+
+    public function deleteTask()
+    {
+        $url = $_GET['url'];
+        $keys = parse_url($url);
+        $path = explode("/", $keys['path']);
+        $lastUrlElement = end($path);
+
+        $content['id'] = $lastUrlElement;
+        if(!isset($_GET['revision']))
+        {
+            http_response_code(500);
+            return json_encode(array('revision'=>"missing"));
+        }
+        $content['revision'] = $_GET['revision'];
+
+        return $this->taskService->deleteTask($content);
     }
 }

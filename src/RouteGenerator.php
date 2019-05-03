@@ -11,7 +11,6 @@ class RouteGenerator
         $url = $_GET['url'];
         $keys = parse_url($url);
         $path = explode("/", $keys['path']);
-
         $lastUrlElement = end($path);
         $urlParamCount = count($path);
 
@@ -26,7 +25,5 @@ class RouteGenerator
         {
             $function->__invoke();
         }
-
-        else http_response_code(404);
     }
 }

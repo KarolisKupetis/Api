@@ -22,3 +22,10 @@
 
     392321367
     4968103424
+
+    assignee_id	integer
+    completed	boolean
+    recurrence_type	string	valid options: "day", "week", "month", "year", must be accompanied by recurrence_count
+    recurrence_count	integer	must be >= 1, must be accompanied by recurrence_type
+    due_date	string	formatted as an ISO8601 date
+    starred	boolean

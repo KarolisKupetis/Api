@@ -5,10 +5,15 @@ namespace View;
 
 class AuthorizationController
 {
-
-    private $client_id = 'f56ec31f424a4973102f';
-    private $client_secret = '446510655627581597b9de831c16ff51fa63b0f020c830579bef0e4427ba';
+    private $client_id;
+    private $client_secret;
     private $callBack = 'http://127.0.0.1/ToDoList/home';
+
+    public function __construct()
+    {
+        $this->client_id = getenv('APP_CLIENT_ID');
+        $this->client_secret = getenv('APP_SECRET');
+    }
 
     public function loginToPage():void
     {

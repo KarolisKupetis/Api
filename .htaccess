@@ -2,6 +2,8 @@
 RewriteEngine on
 
 #Rewrite for index.php
+RewriteCond %{REQUEST_FILENAME} !-f
+RewriteCond %{REQUEST_FILENAME} !-d﻿
 RewriteRule ^(.*)$ index.php?url=$1 [L,QSA]
 
 #RewriteRule ^tasks tasks.php [NC,L]

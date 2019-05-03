@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.0/jquery.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"
+            integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa"
+            crossorigin="anonymous"></script>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css"
+          integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
+    <meta charset="UTF-8">
+    <title >TodoList</title>
+</head>
+<body style="background-image:url(nicebc.jpg)">
+<div class="container">
+
+    <div class="row" style="margin-top: 70px;">
+        <div  style="text-align: center; color: #edf4ff"><h1>TodoTasks</h1></div>
+        <div class="col-md-15">
+            <table class="table">
+                <button type="button" data-target="#myModal" data-toggle="modal" class="btn btn-success">Add task</button>
+                <div id="myModal" class="modal fade" role="dialog">
+                    <div class="modal-dialog">
+
+                        <!-- Modal content-->
+                        <div class="modal-content">
+                            <div class="modal-header">
+                                <button type="button" class="close" data-dismiss="modal">&times;</button>
+                                <h4 style="align-content: center" class="modal-title">Add a task</h4>
+                            </div>
+                            <div class="modal-body">
+
+                                <form method="post" action="http://127.0.0.1/ToDoList/posttask">
+
+                                    <div class="form-group">
+                                        <label for="list_id">list id</label>
+                                        <input type="number" name="list_id" id="list_id" class="form-control">
+                                        <label for="starred">Starred</label>
+                                        <input type="checkbox" name="Starred" id="starred" class="form-control">
+                                        <label for="title">Task Title</label>
+                                        <input type="text" name="title" id="title" class="form-control">
+                                        <label for="due_date">Revision number</label>
+                                        <input type="date" name="due_date" id="due_date" class="form-control">
+                                    </div>
+                                    <input type="submit" name="send" value="send" class="btn btn-success">
+
+                                </form>
+
+                            </div>
+                            <div class="modal-footer">
+                                <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                            </div>
+                        </div>
+
+                    </div>
+                </div>
+                <thead>
+                <tr>
+                    <th style="color: #f8fff9">Task no.</th>
+                    <th style="color: #f8fff9">List no.</th>
+                    <th style="color: #f9f9ff">Title</th>
+                    <th style="color: #f8fff9">Created at</th>
+                    <th style="color: #f9f9ff">Starred</th>
+                    <th style="color: #f8fff9">Revision</th>
+                    <th style="color: #f9f9ff">Completed</th>
+
+                </tr>
+                </thead>
+                <tbody>
+                <?php foreach ($listArray as $list) :?>
+                <tr class="item_row">
+                    <td style="color: #edf4ff"><?php echo $list->id ?></td>
+                    <td style="color: #edf4ff"><?php echo $list->list_id ?></td>
+                    <td style="color: #edf4ff"><?php echo $list->title ?></td>
+                    <td style="color: #edf4ff"><?php echo $list->created_at ?></td>
+                    <td><label>
+                        <input type="checkbox" name="name1" />
+                    </label><?php echo $list->starred ?></td>
+                    <td style="color: #edf4ff"><?php echo $list->revision ?></td>
+                    <td><label>
+                        <input type="checkbox" name="name1" />
+                    </label><?php echo $list->completed ?></td>
+                    <td><a href="" class="btn btn-success">Edit</a></td>
+                    <td><a href="" class="btn btn-danger">Delete</a></td>
+
+                </tr>
+
+                </tbody>
+            </table>
+            <?php endforeach;?>
+        </div>
+    </div>
+</div>
+
+</body>
+</html>
